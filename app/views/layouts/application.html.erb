@@ -8,7 +8,9 @@
   <body>
     <%= render 'layouts/header' %>
       <div class="container">
-        <%= link_to "sample app", '#', id: "logo" %>
+        <% flash.each do |message_type, message| %>
+          <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+        <% end %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to "Home",   '#' %></li>
@@ -21,6 +23,7 @@
     <div class="container">
       <%= yield %>
       <%= render 'layouts/footer' %>
+      <%= debug(params) if Rails.env.development? %>
     </div>
   </body>
 </html>
